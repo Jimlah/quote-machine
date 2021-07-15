@@ -1,6 +1,6 @@
 import { FaQuoteLeft } from "react-icons/fa";
 
-const Quote = ({ textColor }) => {
+const Quote = ({ textColor, quote }) => {
   return (
     <div
       className={`${textColor} font-semibold text-lg flex justify-center flex-col space-y-2`}
@@ -9,13 +9,10 @@ const Quote = ({ textColor }) => {
         <span className="inline-block mr-2">
           <FaQuoteLeft />
         </span>
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Similique
-        tempora nulla praesentium expedita nam quisquam aliquid consequuntur
-        quis? Vel laudantium eos aliquam impedit. Aliquid, ut ipsa autem at
-        earum blanditiis!
+        {quote.quote}
       </p>
       <span id="author" className="text-sm font-light uppercase text-right">
-        - Abdullahi
+        - {quote.author}
       </span>
     </div>
   );
