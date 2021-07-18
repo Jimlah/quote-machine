@@ -10,16 +10,17 @@ const useGetQuote = () => {
     fetch(url)
       .then((res) => {
         if (!res.ok) {
-          throw Error("Could not fetch the data for that url");
+          throw Error("Error fetching API");
         }
         return res.json();
       })
       .then((data) => {
-        setQuotes(data.quotes);
         setIsLoading(false);
+        setQuotes(data.quotes);
       })
       .catch((e) => console.log("Api not loaded"));
-  }, [url]);
+    // eslint-disable-next-line
+  }, []);
 
   return { quotes, isLoading };
 };

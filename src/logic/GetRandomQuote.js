@@ -1,7 +1,13 @@
+import { useEffect, useState } from "react";
 import useGetQuote from "./useGetQuote";
 
 const GetRandomQuote = () => {
   const { quotes, isLoading } = useGetQuote();
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    setData(quotes);
+  }, [quotes]);
 
   let rand = () => {
     if (!isLoading) {
@@ -9,14 +15,10 @@ const GetRandomQuote = () => {
     }
   };
 
-  if (!isLoading) {
-    return quotes[rand()];
-  }
+  let randNum = rand();
+  let quo = data[randNum];
 
-  return {
-    quote: "",
-    author: "",
-  };
+  return { quo: quo, isLoading: isLoading };
 };
 
 export default GetRandomQuote;

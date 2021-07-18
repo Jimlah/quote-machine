@@ -1,17 +1,27 @@
 import { useEffect, useState } from "react";
 import { FaFacebookF, FaTwitter } from "react-icons/fa";
 import { IconContext } from "react-icons/lib";
+import GetRandomColor from "../logic/GetRandomColor";
 import GetRandomQuote from "../logic/GetRandomQuote";
 import Quote from "./Quote";
 
 const Panel = ({ handleColorChange }) => {
-  const [color, setColor] = useState("purple");
+  let { quo } = GetRandomQuote();
+  let col = GetRandomColor();
 
-  const quote = GetRandomQuote();
+  let [color, setColor] = useState("purple");
+  let [quote, setQuote] = useState(quo);
 
   useEffect(() => {
     handleColorChange(color);
-  });
+
+    // eslint-disable-next-line
+  }, [color]);
+
+  const handleSubmit = () => {
+    setQuote(quo);
+    setColor(col);
+  };
 
   let textColor = `text-${color}-500`;
   let bgColor = `bg-${color}-500`;
@@ -20,17 +30,17 @@ const Panel = ({ handleColorChange }) => {
       className="flex items-center justify-center shadow-md p-5 rounded-md bg-white max-w-md mx-5 flex-col space-y-5 min-w-md"
       id="quote-box"
     >
-      <Quote textColor={textColor} quote={quote} />
+      {quo && <Quote textColor={textColor} quote={(quote = quo)} />}
       <div className="flex justify-between items-center w-full">
         <div className="flex justify-start space-x-2">
-          <a href="#" className={`text-white p-2 ${bgColor}`}>
+          <a href="#" className={`text-white p-2.5 rounded-sm ${bgColor}`}>
             <IconContext.Provider value={{ className: "h-5 w-5" }}>
               <FaFacebookF />
             </IconContext.Provider>
           </a>
           <a
             href="twitter.com/intent/tweet"
-            className={`text-white p-2 ${bgColor}`}
+            className={`text-white p-2.5 rounded-sm ${bgColor}`}
             id="tweet-quote"
           >
             <IconContext.Provider value={{ className: "h-5 w-5" }}>
@@ -40,7 +50,8 @@ const Panel = ({ handleColorChange }) => {
         </div>
         <button
           id="new-quote"
-          className={`text-white font-bold px-3 py-2 ${bgColor}`}
+          onClick={handleSubmit}
+          className={`text-white font-bold px-3 py-2 rounded-sm ${bgColor}`}
         >
           New quote
         </button>
