@@ -33,7 +33,10 @@ const Panel = ({ handleColorChange }) => {
       {quo && <Quote textColor={textColor} quote={(quote = quo)} />}
       <div className="flex justify-between items-center w-full">
         <div className="flex justify-start space-x-2">
-          <a href="#" className={`text-white p-2.5 rounded-sm ${bgColor}`}>
+          <a
+            href="facebook.com"
+            className={`text-white p-2.5 rounded-sm ${bgColor}`}
+          >
             <IconContext.Provider value={{ className: "h-5 w-5" }}>
               <FaFacebookF />
             </IconContext.Provider>
